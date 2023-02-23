@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ImportExportXml xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Entities />
+  <Roles />
+  <Workflows />
+  <FieldSecurityProfiles />
+  <Templates />
+  <EntityMaps />
+  <EntityRelationships />
+  <OrganizationSettings />
+  <optionsets />
+  <CustomControls />
+  <EntityDataProviders />
+  <msdyn_dataflows>
+    <msdyn_dataflow msdyn_dataflowid="fcbb0619-d7b2-ed11-83fd-001dd8098656">
+      <iscustomizable>1</iscustomizable>
+      <msdyn_internalversion>06ee3a43-0023-4daf-b8fb-3bb4d61c4bdf</msdyn_internalversion>
+      <msdyn_mashupdocument>section Section1;
+shared ImportData = let
+  Source = Csv.Document(Web.Contents("https://fedairsgcc-my.sharepoint.com/personal/lourainaldi_fedairsgcc_onmicrosoft_com/Documents/ImportData.txt"), [Delimiter = "|", Columns = 2, QuoteStyle = QuoteStyle.None]),
+  #"Promoted headers" = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+  #"Inserted Merged Column" = Table.AddColumn(#"Promoted headers", "Merged", each Text.Combine({Text.Trim([#"First Name "]), [#" Last Name"]}), type text),
+  #"Renamed columns" = Table.RenameColumns(#"Inserted Merged Column", {{"Merged", "Full Name"}, {"First Name ", "First Name"}, {" Last Name", "Last Name"}})
+in
+  #"Renamed columns";
+</msdyn_mashupdocument>
+      <msdyn_mashupsettings>{"QueryGroups":null,"DocumentLocale":"en-US","QueriesMetadata":{"ImportData":{"QueryId":"19120355-0de4-4ebe-9be8-acd2067472b6","QueryName":"ImportData","QueryGroupId":null,"EntityName":"Contact","LastKnownIsCalculatedEntity":false,"LastKnownIsLinkedEntity":false,"LastKnownIsParameter":false,"LastKnownResultTypeName":"table","LoadEnabled":true,"DeleteExistingDataOnLoad":false,"FieldsMetadata":{"FirstName":{"SourceColumnName":"First Name","DestinationFieldType":"Memo","AutoNumberSettings":null},"LastName":{"SourceColumnName":"Last Name","DestinationFieldType":"Memo","AutoNumberSettings":null}},"HostProperties":{"mappingEditorProperties":"{}","MappingEditorProperties":"{}"}}},"FastCombine":false,"AllowNativeQueries":false,"HostContext":{"Type":"CdsT","Details":{"EnvironmentId":"d5ef5b53-6cd4-e090-b0e0-c10317fef0eb"}},"HostProperties":null,"SkipAutomaticTypeAndHeaderDetection":false,"DisableAutoAnonymousConnectionUpsert":false,"AllowedModules":null,"DataflowMetadata":"{\"DataflowType\":\"Cdst\",\"DataflowId\":\"0faa9d3a-bdc8-47a8-8433-e270b6eddc60\",\"OwnerUserId\":\"cc7c42f3-b3ce-4c6e-a8c9-d66dcf9ce68a\",\"OwnerName\":\"Louis Rainaldi Jr\",\"OwnerTenantId\":\"c0daba30-fba7-4669-a2fc-36142728b7e9\",\"GatewayObjectId\":null,\"ModelSnapshotUri\":\"\",\"GroupId\":\"d5ef5b53-6cd4-e090-b0e0-c10317fef0eb\",\"DataflowState\":\"Active\",\"LastUpdateTime\":\"2023-02-23T16:27:49.6688781+00:00\",\"LastStateChangedTime\":\"2023-02-23T16:27:49.6688781+00:00\",\"CreatedTime\":\"2023-02-22T17:34:00.4226122+00:00\",\"ExpiresAfter\":null,\"AllowedModules\":null,\"UseHostConnectionProvider\":false,\"SkipAutomaticTypeAndHeaderDetection\":false,\"EditingSessionId\":null,\"HostInformation\":null,\"HostContext\":{\"Type\":\"CdsT\",\"Details\":{\"EnvironmentId\":\"d5ef5b53-6cd4-e090-b0e0-c10317fef0eb\"}},\"HostProperties\":{\"ServiceFeatureFlag_EnableNewCdstEnvCommonCreate\":\"true\",\"ServiceFeatureFlag_EnableNewCdstDataflowOrchestration\":\"true\"},\"DisableAutoAnonymousConnectionUpsert\":false,\"RelatedDataflowId\":\"98d15ffc-4705-498c-a0b9-49a9f703005b\",\"TrustedConnections\":null,\"ConnectionOverrides\":[{\"Path\":\"https://fedairsgcc-my.sharepoint.com\",\"Kind\":\"Web\",\"Provider\":\"PowerApps\",\"EnvironmentName\":\"d5ef5b53-6cd4-e090-b0e0-c10317fef0eb\",\"ApiName\":\"webcontents\",\"ConnectionName\":\"c30e8a170fea4e4b920fe41be818fff9\",\"ExtensionData\":{},\"CredentialDetails\":{},\"ConnectionParameters\":{},\"PrivacyGroup\":\"None\"}]}","Dataflow":"{\"name\":\"Tab Delimited Contacts Import from OneDrive\",\"ppdf:entityThumbprintVersion\":\"1.0\",\"ppdf:dataflowId\":\"0faa9d3a-bdc8-47a8-8433-e270b6eddc60\",\"ppdf:owner\":{\"tenantId\":\"c0daba30-fba7-4669-a2fc-36142728b7e9\",\"userId\":\"cc7c42f3-b3ce-4c6e-a8c9-d66dcf9ce68a\"},\"version\":\"1.0\",\"culture\":\"en-US\",\"modifiedTime\":\"2023-02-22T17:34:04.8669246+00:00\",\"ppdf:outputFileFormat\":\"Csv\",\"pbi:mashup\":{\"fastCombine\":false,\"allowNativeQueries\":false,\"queriesMetadata\":{\"ImportData\":{\"queryId\":\"19120355-0de4-4ebe-9be8-acd2067472b6\",\"queryName\":\"ImportData\",\"entityName\":\"Contact\",\"loadEnabled\":true,\"lastKnownResultTypeName\":\"table\",\"lastKnownIsCalculatedEntity\":false,\"lastKnownIsLinkedEntity\":false,\"lastKnownIsParameter\":false,\"deleteExistingDataOnLoad\":false,\"hostProperties\":{\"mappingEditorProperties\":\"{}\",\"MappingEditorProperties\":\"{}\"},\"fieldsMetadata\":{\"FirstName\":{\"sourceColumnName\":\"First Name\",\"destinationFieldType\":\"Memo\"},\"LastName\":{\"sourceColumnName\":\"Last Name\",\"destinationFieldType\":\"Memo\"}}}},\"document\":\"section Section1;\\r\\nshared ImportData = let\\r\\n  Source = Csv.Document(Web.Contents(\\\"https://fedairsgcc-my.sharepoint.com/personal/lourainaldi_fedairsgcc_onmicrosoft_com/Documents/ImportData.txt\\\"), [Delimiter = \\\"|\\\", Columns = 2, QuoteStyle = QuoteStyle.None]),\\r\\n  #\\\"Promoted headers\\\" = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),\\r\\n  #\\\"Inserted Merged Column\\\" = Table.AddColumn(#\\\"Promoted headers\\\", \\\"Merged\\\", each Text.Combine({Text.Trim([#\\\"First Name \\\"]), [#\\\" Last Name\\\"]}), type text),\\r\\n  #\\\"Renamed columns\\\" = Table.RenameColumns(#\\\"Inserted Merged Column\\\", {{\\\"Merged\\\", \\\"Full Name\\\"}, {\\\"First Name \\\", \\\"First Name\\\"}, {\\\" Last Name\\\", \\\"Last Name\\\"}})\\r\\nin\\r\\n  #\\\"Renamed columns\\\";\\r\\n\"},\"entities\":[{\"$type\":\"LocalEntity\",\"name\":\"ImportData\",\"description\":\"\",\"pbi:refreshPolicy\":{\"$type\":\"FullRefreshPolicy\",\"location\":\"ImportData.csv\"},\"annotations\":[{\"name\":\"ppdf:entityKeys\",\"value\":\"[]\"}],\"attributes\":[{\"name\":\"First Name\",\"dataType\":\"string\"},{\"name\":\"Last Name\",\"dataType\":\"string\"},{\"name\":\"Full Name\",\"dataType\":\"string\"}]}]}"}</msdyn_mashupsettings>
+      <msdyn_name>Tab Delimited Contacts Import from OneDrive</msdyn_name>
+      <msdyn_originaldataflowid>0faa9d3a-bdc8-47a8-8433-e270b6eddc60</msdyn_originaldataflowid>
+      <msdyn_refreshhistory>[{"DataflowId":"0faa9d3a-bdc8-47a8-8433-e270b6eddc60","TransactionId":"5e47f9ba-8082-4678-bbc3-13f3b1b92464","DataflowName":"New dataflow 3","RequestId":"e77d515b-37e1-4346-ac4f-5d1bfa7bc665","SessionId":null,"StartTime":"2023-02-22T17:34:12.5821184+00:00","EndTime":"2023-02-22T17:34:56.7388189+00:00","RefreshType":"RefreshTypeOneTime","RefreshStatus":"Success","ErrorInfo":null,"EntitiesRefreshHistory":[{"DataflowId":"0faa9d3a-bdc8-47a8-8433-e270b6eddc60","DataflowName":"New dataflow 3","EntityName":"ImportData","StartTime":"2023-02-22T17:34:33.5690084+00:00","EndTime":"2023-02-22T17:34:56.1670324+00:00","RefreshStatus":"Success","ErrorInfo":null,"ErrorCount":0,"UpsertCount":0,"PartitionsRefreshHistory":[{"Name":"ImportData.csv","StartTime":"2023-02-22T17:34:33.5846321+00:00","EndTime":"2023-02-22T17:34:44.8660228+00:00","LastUpdateTime":"2023-02-22T17:34:44.8660228+00:00","RefreshStatus":"Success","ErrorInfo":null}],"InsertCount":4}],"ActionsRefreshHistory":[],"ModelSnapshotPath":""}]</msdyn_refreshhistory>
+      <statecode>0</statecode>
+      <statuscode>1</statuscode>
+    </msdyn_dataflow>
+  </msdyn_dataflows>
+  <Languages>
+    <Language>1033</Language>
+  </Languages>
+</ImportExportXml>
